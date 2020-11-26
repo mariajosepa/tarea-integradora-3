@@ -12,11 +12,16 @@ public class MainCoach extends Coach implements Valuable {
 
     @Override
     public double marketPrice() {
-        return 0;
+        return (getSalary() * 10) + (getYearsExperience() * 100) + (getWonChampionships()*50);
     }
 
     @Override
     public double starLevel() {
-        return 0;
+
+        return (5+(getWonChampionships()/10));
+    }
+
+    public int getWonChampionships() {
+        return wonChampionships;
     }
 }

@@ -14,6 +14,7 @@ public class Team {
         this.name = name;
         assistantCoaches = new AssistantCoach[3];
         players = new Player[25];
+        mainCoach = null;
     }
 
     public void assignMainCoach(MainCoach mainCoach) {
@@ -73,9 +74,15 @@ public class Team {
         return mainCoach.getName();
     }
 
-    public String getAssitantCoaches() {
+    public String getAssistantCoaches() {
         return Arrays.toString(assistantCoaches);
     }
 
+    public Player[] getPlayers(){
+
+        return players;
+
+
+    }
 
 }

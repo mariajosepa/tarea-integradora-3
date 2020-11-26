@@ -2,7 +2,7 @@ public class Player extends Employee implements Valuable {
 
     private int jerseyNumber;
     private int scoredGoals;
-    private int averageRating;
+    private double averageRating;
     private Position position;
 
 
@@ -18,13 +18,59 @@ public class Player extends Employee implements Valuable {
     @Override
     public double marketPrice() {
 
-        return 0;
+      double marketPrice = 0.0;
+
+       if (getPosition().equals("PORTERO")){
+          marketPrice = (getSalary()*12) + (this.averageRating*150);
+       }
+       if (getPosition().equals("DEFENSOR")){
+           marketPrice = (getSalary()*13) + (this.averageRating * 125) + (this.scoredGoals*100);
+       }
+       if (getPosition().equals("VOLANTE")){
+           marketPrice = (getSalary()*14) + (this.averageRating * 135) + (this.scoredGoals*125);
+       }
+       if (getPosition().equals("DELANTERO")){
+           marketPrice = (getSalary()*15) + (this.averageRating * 145) + (this.scoredGoals*150);
+       }
+
+        return marketPrice;
     }
 
     @Override
     public double starLevel() {
-        return 0;
+
+        double starLevel = 0.0;
+
+        if (getPosition().equals("PORTERO")){
+            starLevel = (this.averageRating*0.9);
+        }
+        if (getPosition().equals("DEFENSOR")){
+            starLevel = (this.averageRating * 0.9) + (this.scoredGoals/100);
+        }
+        if (getPosition().equals("VOLANTE")){
+            starLevel = (this.averageRating * 0.9) + (this.scoredGoals/90);
+        }
+        if (getPosition().equals("DELANTERO")){
+            starLevel =  (this.averageRating * 0.9) + (this.scoredGoals/80);
+        }
+
+        return starLevel;
     }
 
 
+    public String getPosition() {
+        return position.name();
+    }
+
+    public double getAverageRating() {
+        return averageRating;
+    }
+
+    public int getScoredGoals() {
+        return scoredGoals;
+    }
+
+    public int getJerseyNumber() {
+        return jerseyNumber;
+    }
 }
