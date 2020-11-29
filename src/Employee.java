@@ -3,7 +3,7 @@ public abstract class Employee {
     private  String name;
     private  String id;
     private  double salary;
-    private double isActive;
+    private boolean isActive;
 
     public Employee(String name, String id, double salary){
 
@@ -25,7 +25,18 @@ public abstract class Employee {
         return salary;
     }
 
-    public double getIsActive() {
+    public boolean getIsActive() {
         return isActive;
     }
+
+    public void setIsActiveOFF() {
+        this.isActive = false;
+    }
+
+    public void setIsActiveON(){
+
+        this.isActive = true;
+
+    }
+
 }

@@ -11,12 +11,15 @@ public class Formation {
     private int [] line3;
     private int [] line4;
     private int [] line5;
+    private int [] line6;
+    private int [] line7;
 
 
     public Formation(String date, int tactic, String fieldFormation){
 
         this.date = date;
         this.tactic = Tactic.values()[tactic];
+
         this.fieldFormation = fieldFormation;
         field = new int[][]{{0,0,0,0,0,0,0},
                             {0,0,0,0,0,0,0},
@@ -35,122 +38,112 @@ public class Formation {
         line3 = new int[] {0,1,0,1,0,1,0};
         line4 = new int[] {0,1,1,0,1,1,0};
         line5 = new int[] {0,1,1,1,1,1,0};
+        line6 = new int[] {0,1,1,1,1,1,1};
+        line7 = new int[] {1,1,1,1,1,1,1};
+
     }
 
     public int[][] assignFormationLines(){
 
         String [] splitFormation = fieldFormation.split("-");
 
-        String defense = splitFormation[0];
-        String mid = splitFormation[1];
-        String offense = splitFormation[2];
+        int formationLines = splitFormation.length;
+        int playerDistribution =  (int) 10/formationLines;
+
+        int counter = 0;
+
+        if(formationLines % 2 == 0){
+
+            for(int i = 1; i < 10 && counter < formationLines; i= i + playerDistribution) {
+
+                if(assignFormation(splitFormation[counter]) != null) {
+
+                    field[i] = assignFormation(splitFormation[counter]);
+
+                    counter++;
+
+                    System.out.println("EVEN");
+
+                }
+            }
+
+        }
+
+        else{
+
+            for(int i = 1; i < 10 && counter < formationLines; i = i + playerDistribution) {
+
+                if(assignFormation(splitFormation[counter]) != null) {
+
+                    field[i] = assignFormation(splitFormation[counter]);
+
+                    counter++;
+
+                    System.out.println("ODD");
+                }
+            }
 
 
-        assignDefense(defense);
-        assignMid(mid);
-        assignOffense(offense);
+
+
+        }
+
+
+
+
+
+
+
 
 
         return field;
 
     }
 
-    public void assignDefense(String defense){
+    public int[] assignFormation(String position){
 
-        if(defense.equals("1")){
-            field[2] = line1;
-
-        }
-       else if(defense.equals("2")){
-            field[2] = line2;
+        if(position.equals("1")){
+            return line1;
 
         }
-
-        else if(defense.equals("3")){
-            field[2] = line3;
+       else if(position.equals("2")){
+            return line2;
 
         }
 
-        else if (defense.equals("4")){
-
-            field[2] = line4;
-
-        }
-
-        else if (defense.equals("5")){
-
-            field[3] = line5;
+        else if(position.equals("3")){
+            return line3;
 
         }
 
+        else if (position.equals("4")){
 
-
-
-    }
-
-    public void assignMid(String mid){
-
-        if(mid.equals("1")){
-            field[5] = line1;
-
-        }
-        else if(mid.equals("2")){
-            field[5] = line2;
+            return line4;
 
         }
 
-        else if(mid.equals("3")){
-            field[5] = line3;
+        else if (position.equals("5")){
+
+          return line5;
 
         }
 
-        else if (mid.equals("4")){
+        else if(position.equals("6")){
 
-            field[5] = line4;
-
-        }
-
-        else if (mid.equals("5")){
-
-            field[5] = line5;
+            return line6;
 
         }
 
+        else if(position.equals("7")){
 
-
-    }
-
-    public void assignOffense(String offense){
-
-        if(offense.equals("1")){
-            field[8] = line1;
-
-        }
-        else if(offense.equals("2")){
-            field[8] = line2;
+            return line7;
 
         }
 
-        else if(offense.equals("3")){
-            field[8] = line3;
+        else{
+            return null;
 
         }
-
-        else if (offense.equals("4")){
-
-            field[8] = line4;
-
-        }
-
-        else if (offense.equals("5")){
-
-            field[8] = line5;
-
-        }
-
-
-
-
 
 
     }
@@ -173,6 +166,11 @@ public class Formation {
     }
 
 
+    public String getTactic() {
+        return tactic.name();
+    }
 
-
+    public String getDate() {
+        return date;
+    }
 }

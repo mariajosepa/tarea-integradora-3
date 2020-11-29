@@ -2,10 +2,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Formation formation = new Formation("15/03/2020", 1, "3-4-5");
+     Formation formation = new Formation("4",2,"7-2-1");
 
+     formation.assignFormationLines();
 
-        System.out.println(formation.getFieldFormation());
+      System.out.println(formation.getFieldFormation());
 
     }
 }

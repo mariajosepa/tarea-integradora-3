@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SoccerClub {
 
@@ -20,9 +21,9 @@ public class SoccerClub {
         nit = "12345678";
         foundingDate = "4/1/1970";
         employees = new ArrayList<Employee>();
-        dressingRoomA = new int[][]{{0,0,0,0,0,0},
-                                    {0,0,0,0,0,0},
-                                    {0,0,0,0,0,0},
+        dressingRoomA = new int[][]{{0,0,0,0,0,0}, //0,2,4
+                                    {0,0,0,0,0,0}, //1,3,5
+                                    {0,0,0,0,0,0}, //0,2,4
                                     {0,0,0,0,0,0},
                                     {0,0,0,0,0,0},
                                     {0,0,0,0,0,0},
@@ -49,6 +50,7 @@ public class SoccerClub {
         if(findEmployee(name) != null){
 
             employees.remove(findEmployee(name));
+            findEmployee(name).setIsActiveOFF();
             return "Empleado despedido";
 
         }
@@ -93,7 +95,6 @@ public class SoccerClub {
     }
 
     public Employee findEmployee(String name){
-
 
         for(Employee employee : employees){
 
@@ -145,30 +146,116 @@ public class SoccerClub {
 
     }
 
-    public void displayPlayersDressingRoomA(){
+    public String displayPlayersDressingRoomA(){
+
+       boolean[][] positions = new boolean[][]
+                {{true,false,true,false,true,false},
+                {false,true,false,true,false,true},
+                {true,false,true,false,true,false},
+                {false,true,false,true,false,true},
+                {true,false,true,false,true,false},
+                {false,true,false,true,false,true},
+                {true,false,true,false,true,false}};
 
 
-        if(teams[0] != null){
+        Player[] players = teams[0].getPlayers();
+        int index  = 0;
 
-            for(int i = 0; i < 6; i++) {
+            for(int i = 0; i < 7; i++) {
 
-                for (int j = 0; j < 5; j++) {
+                for(int j = 0; j < 6; j++) {
 
+                       if(players[index] != null && positions[i][j] == true){
 
+                           dressingRoomA[i][j] = players[index].getJerseyNumber();
+                           index++;
 
+                       }
 
                 }
 
+            }
+
+        String playersInDressingRoomA = Arrays.toString(dressingRoomA[0]) + "\n";
+
+        for (int i = 1; i < 6 ; i++) {
+
+            playersInDressingRoomA += Arrays.toString(dressingRoomA[i]) + "\n";
+
+        }
+         return playersInDressingRoomA;
+
+    }
+
+    public String displayPlayersDressingRoomB(){
+
+        boolean[][] positions = new boolean[][]
+                        {{true,false,true,false,true,false,true},
+                        {false,true,false,true,false,true,false},
+                        {true,false,true,false,true,false,true},
+                        {false,true,false,true,false,true,false},
+                        {true,false,true,false,true,false,true},
+                        {false,true,false,true,false,true,false},
+                        {true,false,true,false,true,false,true}};
+
+
+        Player[] players = teams[1].getPlayers();
+        int index  = 0;
+
+        for(int i = 0; i < 7; i++) {
+
+            for(int j = 0; j < 6; j++) {
+
+                if(players[index] != null && positions[i][j]){
+
+                    dressingRoomB[i][j] = players[index].getJerseyNumber();
+                    index++;
+
+                }
 
             }
 
+        }
+
+        String playersInDressingRoomB = Arrays.toString(dressingRoomB[0]) + "\n";
+
+        for (int i = 1; i < 6 ; i++) {
+
+            playersInDressingRoomB += Arrays.toString(dressingRoomB[i]) + "\n";
+
+        }
+        return playersInDressingRoomB;
 
 
+
+    }
+
+    public String addPlayerToTeam(String name, int team){
+
+        team = team - 1;
+        boolean added = false;
+
+        if(findEmployee(name) != null && findEmployee(name) instanceof Player){
+
+             added = teams[team].addPlayer((Player) findEmployee(name));
+
+        }
+
+        if(!added){
+
+            return "No hay cupo para mas jugadores en el equipo " + teams[team].getName() + "\n";
+
+        }
+
+        else{
+
+            return "Jugador agregado al equipo " + teams[team].getName() + "\n";
 
         }
 
 
 
     }
+
 
 }
