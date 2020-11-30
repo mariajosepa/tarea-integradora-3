@@ -43,9 +43,10 @@ public abstract class Employee {
 
     public String getInfo(){
 
-        String msg = "Nombre: " + getName() + "\n";
-         msg +=      "ID: " + getId() + "\n";
-        msg +=       "Salario: " + getSalary() + "\n";
+        String msg = "------------------------------------" + "\n";
+        msg+=   "Nombre: " + getName() + "\n";
+        msg +=   "ID: " + getId() + "\n";
+        msg +=   "Salario: " + getSalary() + "\n";
 
         return msg;
     };

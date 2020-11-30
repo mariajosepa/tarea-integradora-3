@@ -13,6 +13,9 @@ public class MainCoach extends Coach implements Valuable {
         this.wonChampionships = wonChampionships;
     }
 
+    public int getTeamsInCharge() {
+        return teamsInCharge;
+    }
 
     @Override
     public double marketPrice() {
@@ -31,6 +34,18 @@ public class MainCoach extends Coach implements Valuable {
 
     @Override
     public String getInfo() {
-        return null;
+
+        String msg = super.getInfo();
+        msg += "Equipos a Cargo: " + getTeamsInCharge()+ "\n";
+        msg +=  "Campeonatos Ganados " + getWonChampionships()+ "\n";
+        msg +=  "Nivel de Estrella: " + starLevel()+ "\n";
+        msg +=  "Valor de Mercado: " + marketPrice()+ "\n";
+        msg += "------------------------------------" + "\n";
+        return msg;
+
+
+
     }
+
+
 }

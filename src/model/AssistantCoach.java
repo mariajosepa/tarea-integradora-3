@@ -26,12 +26,25 @@ public class AssistantCoach extends Coach {
 
     }
 
-    public boolean isWasPro() {
+    public boolean wasPro() {
         return wasPro;
+    }
+
+
+    public String getExpertise() {
+        return expertise.name();
     }
 
     @Override
     public String getInfo() {
-        return null;
+
+        String wasPro = ((wasPro() == true) ? "Si" : "No");
+       String msg = super.getInfo();
+       msg += "Profesional: " + wasPro+ "\n";
+        msg += "Experticia: " + getExpertise()+ "\n";
+        msg += "------------------------------------" + "\n";
+        return msg;
     }
+
+
 }

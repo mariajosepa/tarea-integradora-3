@@ -79,10 +79,14 @@ public class Player extends Employee implements Valuable {
 
     @Override
     public String getInfo() {
-       super.getInfo();
-       String msg = "Numero: " + getJerseyNumber()+ "\n";
-       msg +=      "Goles anotados: " + getJerseyNumber()+ "\n";
-       msg +=      "Calificacion promedio: " + getJerseyNumber()+ "\n";
+
+       String msg = super.getInfo();
+       msg += "Numero: " + getJerseyNumber()+ "\n";
+       msg +=  "Goles anotados: " + getScoredGoals()+ "\n";
+       msg +=  "Calificacion promedio: " + getAverageRating()+ "\n";
+       msg +=  "Nivel de Estrella: " + starLevel()+ "\n";
+       msg +=  "Valor de Mercado: " + marketPrice()+ "\n";
+       msg += "------------------------------------" + "\n";
         return msg;
     }
 }

@@ -77,8 +77,8 @@ public class Team {
         return name;
     }
 
-    public String getMainCoach() {
-        return mainCoach.getName();
+    public MainCoach getMainCoach() {
+        return mainCoach;
     }
 
     public AssistantCoach[] getAssistantCoaches() {

@@ -156,26 +156,64 @@ public class SoccerClub {
         }
 
         if(added){
-
+            findEmployee(name).setIsActiveON();
             return "Tecnico asistente agregado a "+ teams[team].getName() + "\n";
 
         }
 
         else{
 
-            findEmployee(name).setIsActiveON();
+
             return "No hay mas cupos para tecnicos asistentes, puestos ocupados por " + Arrays.toString(teams[0].getAssistantCoaches()) + "\n";
 
         }
 
     }
 
-    public String addTeamFormation(int team, String date, int tactic, String fieldFormation){
+    public String assignMainCoach(int team, String name){
 
-        Formation newFormation = new Formation(date,tactic,fieldFormation);
-        String msg = "";
+        boolean added = false;
+        team = team - 1;
+        if(findEmployee(name) != null && findEmployee(name) instanceof MainCoach && teams[team].getMainCoach() == null){
 
-        switch(team){
+            teams[team].assignMainCoach((MainCoach) findEmployee(name));
+            added = true;
+        }
+
+        if(added){
+            findEmployee(name).setIsActiveON();
+            return "Tecnico asistente agregado a "+ teams[team].getName() + "\n";
+
+        }
+
+        else{
+
+
+            return "No hay mas cupos para tecnicos asistentes, puestos ocupados por " + Arrays.toString(teams[0].getAssistantCoaches()) + "\n";
+
+        }
+
+
+
+
+    }
+
+    public String addTeamFormation(int team, String date, int tactic, String fieldFormation) {
+
+        Formation newFormation = new Formation(date, tactic, fieldFormation);
+        String msg = "Formacion invalida (no se admiten mas de 7 jugadores en una fila y los valores deben sumar a 10)";
+
+        String[] splitFormation = fieldFormation.split("-");
+        int sum = 0;
+
+        for (int i = 0; i < splitFormation.length; i++) {
+
+            sum = sum + Integer.parseInt(splitFormation[i]);
+
+        }
+
+        if(sum == 10){
+        switch (team) {
 
             //model.Team A
             case 1:
@@ -192,7 +230,6 @@ public class SoccerClub {
                 break;
 
 
-
             default:
 
                 msg = "Por favor ingrese una opcion valida";
@@ -201,7 +238,7 @@ public class SoccerClub {
                 break;
 
         }
-
+    }
         return msg;
 
 
@@ -215,9 +252,9 @@ public class SoccerClub {
 
         for(Employee employee : employees){
 
-            if (employee instanceof MainCoach && teams[team].getMainCoach().equals(employee.getName())){
+            if (employee instanceof MainCoach && teams[team].getMainCoach() != null && teams[team].getMainCoach().getName().equals(employee.getName())){
 
-                employee.getInfo();
+                msg += employee.getInfo();
 
             }
 
@@ -226,9 +263,20 @@ public class SoccerClub {
       msg += "Asistentes Tecnicos: " + "\n";
         for(Employee employee : employees){
 
-            if (employee instanceof AssistantCoach && Arrays.asList(teams[team].getAssistantCoaches()).contains(employee.getName())){
+            if (employee instanceof AssistantCoach){
 
-                employee.getInfo();
+                AssistantCoach [] assistantCoaches = teams[team].getAssistantCoaches();
+
+                for (int i = 0; i < assistantCoaches.length; i++) {
+
+                    if(assistantCoaches[i] != null && employee.getName().equals(assistantCoaches[i].getName())){
+
+                        msg += employee.getInfo();
+
+                    }
+                }
+
+
 
             }
 
@@ -240,7 +288,7 @@ public class SoccerClub {
 
             if (employee instanceof Player && Arrays.asList(teams[team].getPlayers()).contains(employee.getName())){
 
-                employee.getInfo();
+                msg += employee.getInfo();
 
             }
 
