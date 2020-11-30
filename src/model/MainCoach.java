@@ -1,3 +1,7 @@
+package model;
+
+import model.Coach;
+
 public class MainCoach extends Coach implements Valuable {
 
     private int teamsInCharge;
@@ -23,5 +27,10 @@ public class MainCoach extends Coach implements Valuable {
 
     public int getWonChampionships() {
         return wonChampionships;
+    }
+
+    @Override
+    public String getInfo() {
+        return null;
     }
 }

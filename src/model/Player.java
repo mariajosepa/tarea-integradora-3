@@ -1,3 +1,7 @@
+package model;
+
+import model.Employee;
+
 public class Player extends Employee implements Valuable {
 
     private int jerseyNumber;
@@ -13,7 +17,6 @@ public class Player extends Employee implements Valuable {
         this.averageRating = averageRating;
         this.position = Position.values()[position];
     }
-
 
     @Override
     public double marketPrice() {
@@ -72,5 +75,14 @@ public class Player extends Employee implements Valuable {
 
     public int getJerseyNumber() {
         return jerseyNumber;
+    }
+
+    @Override
+    public String getInfo() {
+       super.getInfo();
+       String msg = "Numero: " + getJerseyNumber()+ "\n";
+       msg +=      "Goles anotados: " + getJerseyNumber()+ "\n";
+       msg +=      "Calificacion promedio: " + getJerseyNumber()+ "\n";
+        return msg;
     }
 }

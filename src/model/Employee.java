@@ -1,3 +1,5 @@
+package model;
+
 public abstract class Employee {
 
     private  String name;
@@ -38,5 +40,14 @@ public abstract class Employee {
         this.isActive = true;
 
     }
+
+    public String getInfo(){
+
+        String msg = "Nombre: " + getName() + "\n";
+         msg +=      "ID: " + getId() + "\n";
+        msg +=       "Salario: " + getSalary() + "\n";
+
+        return msg;
+    };
 
 }

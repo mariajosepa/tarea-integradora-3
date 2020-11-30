@@ -1,3 +1,7 @@
+package model;
+
+import model.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -63,17 +67,19 @@ public class SoccerClub {
         MainCoach mainCoach = new MainCoach(name, id, salary, teamsInCharge, wonChampionships);
 
         employees.add(mainCoach);
+        mainCoach.setIsActiveOFF();
 
         return "Nuevo tecnico contratado" + "\n";
 
 
     }
 
-    public String hireEmployee( String id, int wasPro, int expertise, double salary, String name){
+    public String hireEmployee(double salary, int wasPro, int expertise, String name, String id){
 
-        AssistantCoach assistantCoach = new AssistantCoach(name, id, salary, wasPro, expertise);
+        AssistantCoach assistantCoach = new AssistantCoach(salary,wasPro,expertise,name,id);
 
         employees.add(assistantCoach);
+        assistantCoach.setIsActiveOFF();
 
         return "Nuevo asistente tecnico contratado" + "\n";
 
@@ -86,6 +92,7 @@ public class SoccerClub {
         Player player = new Player(name, id, salary, jerseyNumber, scoredGoals,averageRating,position);
 
         employees.add(player);
+        player.setIsActiveOFF();
 
         return "Nuevo jugador contratado" + "\n";
 
@@ -109,6 +116,60 @@ public class SoccerClub {
 
     }
 
+    public String addPlayerToTeam(String name, int team){
+
+        team = team - 1;
+        boolean added = false;
+
+        if(findEmployee(name) != null && findEmployee(name) instanceof Player){
+
+            added = teams[team].addPlayer((Player) findEmployee(name));
+
+        }
+
+        if(!added){
+
+            return "No hay cupo para mas jugadores en el equipo " + teams[team].getName() + "\n";
+
+        }
+
+        else{
+
+            findEmployee(name).setIsActiveON();
+            return "Jugador agregado al equipo " + teams[team].getName() + "\n";
+
+
+        }
+
+
+
+    }
+
+    public String assignAssistantCoach(int team, String name){
+
+        boolean added = false;
+        team = team - 1;
+        if(findEmployee(name) != null && findEmployee(name) instanceof AssistantCoach){
+
+           added = teams[team].addAssistantCoach((AssistantCoach) findEmployee(name));
+
+        }
+
+        if(added){
+
+            return "Tecnico asistente agregado a "+ teams[team].getName() + "\n";
+
+        }
+
+        else{
+
+            findEmployee(name).setIsActiveON();
+            return "No hay mas cupos para tecnicos asistentes, puestos ocupados por " + Arrays.toString(teams[0].getAssistantCoaches()) + "\n";
+
+        }
+
+    }
+
     public String addTeamFormation(int team, String date, int tactic, String fieldFormation){
 
         Formation newFormation = new Formation(date,tactic,fieldFormation);
@@ -116,14 +177,14 @@ public class SoccerClub {
 
         switch(team){
 
-            //Team A
+            //model.Team A
             case 1:
                 teams[0].addFormation(newFormation);
                 msg = "Formacion agregada al equipo: " + teams[0].getName() + "\n";
                 break;
 
 
-            //Team B
+            //model.Team B
             case 2:
 
                 teams[1].addFormation(newFormation);
@@ -144,6 +205,69 @@ public class SoccerClub {
         return msg;
 
 
+    }
+
+    public String displayEmployees(int team){
+
+        team = team - 1;
+
+        String msg = "Tecnicos: " + "\n";
+
+        for(Employee employee : employees){
+
+            if (employee instanceof MainCoach && teams[team].getMainCoach().equals(employee.getName())){
+
+                employee.getInfo();
+
+            }
+
+        }
+
+      msg += "Asistentes Tecnicos: " + "\n";
+        for(Employee employee : employees){
+
+            if (employee instanceof AssistantCoach && Arrays.asList(teams[team].getAssistantCoaches()).contains(employee.getName())){
+
+                employee.getInfo();
+
+            }
+
+        }
+
+        msg += "Jugadores: " + "\n";
+
+        for(Employee employee : employees){
+
+            if (employee instanceof Player && Arrays.asList(teams[team].getPlayers()).contains(employee.getName())){
+
+                employee.getInfo();
+
+            }
+
+        }
+
+        return msg;
+    }
+
+    public String displayTeamFormations(int team){
+
+        int chosenTeam = team - 1;
+       ArrayList<Formation> formations = teams[chosenTeam].getFormations();
+
+       String msg = teams[chosenTeam].getName() + "\n";
+
+
+       if(formations != null) {
+           for(Formation formation : formations) {
+
+               msg += formation.getFieldFormation() +  "\n";
+
+           }
+
+           return msg;
+       }
+
+        return "No hay alineaciones disponibles";
     }
 
     public String displayPlayersDressingRoomA(){
@@ -230,32 +354,65 @@ public class SoccerClub {
 
     }
 
-    public String addPlayerToTeam(String name, int team){
+    public String displayOffices(){
 
-        team = team - 1;
-        boolean added = false;
+       Coach[] coaches = new Coach[40];
 
-        if(findEmployee(name) != null && findEmployee(name) instanceof Player){
+        boolean[][] positions = new boolean[][]
+                        {{true,false,true,false,true,false},
+                        {false,true,false,true,false,true},
+                        {true,false,true,false,true,false},
+                        {false,true,false,true,false,true},
+                        {true,false,true,false,true,false},
+                        {false,true,false,true,false,true}};
 
-             added = teams[team].addPlayer((Player) findEmployee(name));
+        int index = 0;
+
+        for(Employee employee : employees){
+
+            if(employee instanceof Coach && coaches[index] == null){
+
+                 coaches[index] = (Coach)employee;
+                 index++;
+
+            }
 
         }
 
-        if(!added){
+        index = 0;
 
-            return "No hay cupo para mas jugadores en el equipo " + teams[team].getName() + "\n";
+        for (int i = 0; i < 6 && index <= coaches.length ; i++) {
+
+            for (int j = 0; j < 6 && index <= coaches.length ; j++) {
+
+                if(positions[i][j] && coaches[index] != null){
+
+                    offices[i][j] = coaches[index].getName();
+                    index++;
+                }
+
+
+            }
 
         }
 
-        else{
+        String coachesInOffices = Arrays.toString(offices[0]) + "\n";
 
-            return "Jugador agregado al equipo " + teams[team].getName() + "\n";
+        for (int i = 1; i < 6 ; i++) {
+
+            coachesInOffices += Arrays.toString(offices[i]) + "\n";
 
         }
+        return coachesInOffices;
+
 
 
 
     }
+
+
+
+
 
 
 }

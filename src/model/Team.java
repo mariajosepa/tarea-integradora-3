@@ -1,5 +1,11 @@
+package model;
+
+import model.AssistantCoach;
+import model.Formation;
+import model.MainCoach;
+import model.Player;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Team {
 
@@ -15,6 +21,7 @@ public class Team {
         assistantCoaches = new AssistantCoach[3];
         players = new Player[25];
         mainCoach = null;
+        formations = new ArrayList<Formation>();
     }
 
     public void assignMainCoach(MainCoach mainCoach) {
@@ -74,8 +81,8 @@ public class Team {
         return mainCoach.getName();
     }
 
-    public String getAssistantCoaches() {
-        return Arrays.toString(assistantCoaches);
+    public AssistantCoach[] getAssistantCoaches() {
+        return assistantCoaches;
     }
 
     public Player[] getPlayers(){
@@ -85,4 +92,7 @@ public class Team {
 
     }
 
+    public ArrayList<Formation> getFormations() {
+        return formations;
+    }
 }

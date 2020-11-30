@@ -1,9 +1,11 @@
+package model;
+
 public class AssistantCoach extends Coach {
 
     private boolean wasPro;
     private Expertise expertise;
 
-    public AssistantCoach(String name, String id, double salary, int wasPro, int expertise) {
+    public AssistantCoach(double salary, int wasPro, int expertise, String name, String id) {
         super(name, id, salary);
 
         switch(wasPro){
@@ -26,5 +28,10 @@ public class AssistantCoach extends Coach {
 
     public boolean isWasPro() {
         return wasPro;
+    }
+
+    @Override
+    public String getInfo() {
+        return null;
     }
 }
