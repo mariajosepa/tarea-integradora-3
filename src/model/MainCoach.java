@@ -13,6 +13,11 @@ public class MainCoach extends Coach implements Valuable {
         this.wonChampionships = wonChampionships;
     }
 
+    /**
+     * Return's number of teams in charge
+     * @return teams in charge
+     */
+
     public int getTeamsInCharge() {
         return teamsInCharge;
     }
@@ -27,6 +32,11 @@ public class MainCoach extends Coach implements Valuable {
 
         return (5+(getWonChampionships()/10));
     }
+
+    /**
+     * Return's number of won championships
+     * @return
+     */
 
     public int getWonChampionships() {
         return wonChampionships;

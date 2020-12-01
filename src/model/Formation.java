@@ -20,7 +20,7 @@ public class Formation {
     public Formation(String date, int tactic, String fieldFormation) {
 
         this.date = date;
-        this.tactic = Tactic.values()[tactic];
+        this.tactic = Tactic.values()[tactic-1];
 
         this.fieldFormation = fieldFormation;
         field = new int[][]
@@ -45,6 +45,12 @@ public class Formation {
         line7 = new int[]{1, 1, 1, 1, 1, 1, 1};
 
     }
+
+    /**
+     * Takes user's input (eg. 4-4-2) and distributes the players evenly across the field matrix
+     * <b>Pre: </b>
+     * @return The matrix playing field with all players distributed in the specified formation
+     */
 
     public int[][] assignFormationLines() {
 
@@ -90,6 +96,12 @@ public class Formation {
 
     }
 
+    /**
+     * Takes a number (string) and returns a particular line formation array to match said number
+     * @param position
+     * @return formation line
+     */
+
     public int[] assignFormation(String position) {
 
         if (position.equals("1")) {
@@ -125,6 +137,12 @@ public class Formation {
 
     }
 
+    /**
+     * Return's the formation, formatted and with information about its tactic, distribution and players
+     * <b>Pre: </b> A valid formation has to be created
+     * @return field formation information
+     */
+
     public String getFieldFormation() {
 
         int[][] finalFormation = assignFormationLines();
@@ -150,13 +168,28 @@ public class Formation {
 
     }
 
+    /**
+     * Return's the formation's tactic
+     * @return formation's tactic
+     */
+
     public String getTactic() {
         return tactic.name();
     }
 
+    /**
+     * Return's the formation's added date
+     * @return Formation's date
+     */
+
     public String getDate() {
         return date;
     }
+
+    /**
+     * Counts how many players are in the lower half of the field matrix
+     * @return how many defense are in the field
+     */
 
     public int countDefense() {
 
@@ -175,6 +208,11 @@ public class Formation {
         return counter;
     }
 
+    /**
+     * Counts number of players in the mid field matrix
+     * @return number of midfielders
+     */
+
     public int countMidfield() {
 
         int counter = 0;
@@ -192,6 +230,11 @@ public class Formation {
 
         return counter;
     }
+
+    /**
+     * Counts number of players in the upper half of the field matrix
+     * @return number of forwards
+     */
 
     public int countForwards(){
 
@@ -215,6 +258,11 @@ public class Formation {
 
 
     }
+
+    /**
+     * Transform's the matrix into its equivalent format (A-B-C)
+     * @return Matrix in A-A-A form
+     */
 
     public String formatName() {
 

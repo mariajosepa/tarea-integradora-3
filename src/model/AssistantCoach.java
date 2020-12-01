@@ -5,17 +5,17 @@ public class AssistantCoach extends Coach {
     private boolean wasPro;
     private Expertise expertise;
 
-    public AssistantCoach(double salary, int wasPro, int expertise, String name, String id) {
+    public AssistantCoach(double salary, char wasPro, int expertise, String name, String id) {
         super(name, id, salary);
 
         switch(wasPro){
 
-            case 1:
+            case 's':
 
                 this.wasPro = true;
 
                 break;
-            case 2:
+            case 'n':
 
                 this.wasPro = false;
 
@@ -26,10 +26,18 @@ public class AssistantCoach extends Coach {
 
     }
 
+    /**
+     * Return's boolean to specify if coach was pro (true) or not (false)
+     * @return boolean
+     */
     public boolean wasPro() {
         return wasPro;
     }
 
+    /**
+     * Return's the coaches expertise
+     * @return the coach's expertise
+     */
 
     public String getExpertise() {
         return expertise.name();

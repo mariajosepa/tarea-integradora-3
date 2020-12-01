@@ -9,6 +9,7 @@ public class Menu {
     private final static int TEAMS = 1;
     private final static int EMPLOYEE_INFO = 2;
     private final static int FACILITIES = 3;
+    private final static int EXIT = 4;
 
     private SoccerClub club;
     private Scanner input;
@@ -20,13 +21,19 @@ public class Menu {
 
     }
 
+    public int readOption() {
+        int choice = input.nextInt();
+        input.nextLine();
+        return choice;
+
+    }
+
     public void showMenu() {
 
         System.out.println("(1) EQUIPOS");
         System.out.println("(2) EMPLEADOS");
         System.out.println("(3) EDIFICIOS");
     }
-
 
     public void showTeams(){
 
@@ -44,13 +51,337 @@ public class Menu {
         System.out.println("(6) MOSTRAR EQUIPO");
     }
 
-
     public void showFacilityOptions(){
 
         System.out.println("(1) OFICINAS");
         System.out.println("(2) CAMERINO JAVA");
         System.out.println("(3) CAMERINO APO");
     }
+
+    public void showTactics(){
+
+        System.out.println("(1) POSESION");
+        System.out.println("(2) CONTRAATAQUE");
+        System.out.println("(3) PRESION ALTA");
+        System.out.println("(4) POR DEFECTO");
+    }
+
+    public void showExpertises(){
+
+        System.out.println("(1) OFENSIVO");
+        System.out.println("(2) DEFENSIVO");
+        System.out.println("(3) POSESION");
+        System.out.println("(4) LABORATORIO");
+
+    }
+
+    public void showPositions(){
+
+        System.out.println("(1) PORTERO");
+        System.out.println("(2) DEFENSA");
+        System.out.println("(3) VOLANTE");
+        System.out.println("(4) DELANTERO");
+
+
+    }
+
+    public void showEmployeeOptions(){
+
+        System.out.println("(1) CONTRATAR EMPLEADO");
+        System.out.println("(2) DESPEDIR EMPLEADO");
+        System.out.println("(3) MOSTRAR EMPLEADOS");
+
+    }
+
+    public void showTypesEmployees(){
+
+        System.out.println("(1) TECNICO");
+        System.out.println("(2) ASISTENTE TECNICO");
+        System.out.println("(3) JUGADOR");
+
+    }
+
+    public void teams(){
+
+      int option;
+      int team;
+      showTeams();
+      option = readOption();
+
+      switch(option){
+
+
+          case 1:
+
+              team = 1;
+              showTeamOptions();
+              option = readOption();
+
+              switch(option){
+
+                  case 1:
+                      assignMainCoach(team);
+                      break;
+                  case 2:
+                      assignAssistantCoach(team);
+                      break;
+                  case 3:
+                      addPlayerToTeam(team);
+                      break;
+                  case 4:
+                      addFormation(team);
+                      break;
+                  case 5:
+                      System.out.println(club.displayTeamFormations(team));
+                      break;
+                  case 6:
+                      System.out.println(club.displayTeam(team));
+                      break;
+
+              }
+
+              break;
+          case 2:
+              team = 2;
+              showTeamOptions();
+              option = readOption();
+
+              switch(option){
+
+                  case 1:
+                      assignMainCoach(team);
+                      break;
+                  case 2:
+                      assignAssistantCoach(team);
+                      break;
+                  case 3:
+                      addPlayerToTeam(team);
+                      break;
+                  case 4:
+                      addFormation(team);
+                      break;
+                  case 5:
+                      System.out.println(club.displayTeamFormations(team));
+                      break;
+                  case 6:
+                      System.out.println(club.displayTeam(team));
+                      break;
+
+
+              }
+
+
+              break;
+
+
+      }
+
+    }
+
+    public void assignMainCoach(int team){
+
+        System.out.println("Ingrese nombre del tecnico");
+        String name = input.next();
+
+        System.out.println( club.assignMainCoach(team,name));
+    }
+
+    public void assignAssistantCoach(int team){
+
+        System.out.println("Ingrese nombre del asistente tecnico");
+        String name = input.next();
+
+        System.out.println(club.assignAssistantCoach(team,name));
+
+    }
+
+    public void addPlayerToTeam(int team){
+        System.out.println("Ingrese nombre del jugador");
+        String name = input.next();
+
+        System.out.println(club.addPlayerToTeam(name,team));
+
+    }
+
+    public void addFormation(int team){
+
+        System.out.println("Ingrese la fecha");
+        String date = input.next();
+
+        System.out.println("Seleccione la tactica");
+        showTactics();
+        int tactic = input.nextInt();
+
+        System.out.println("Ingrese formacion (ej. 4-4-2)");
+        String fieldFormation = input.next();
+
+        System.out.println(club.addTeamFormation(team, date, tactic, fieldFormation));
+
+    }
+
+    public void employees(){
+        showEmployeeOptions();
+        int option = readOption();
+
+        System.out.println("Ingrese nombre del empleado");
+        String name = input.next();
+
+        System.out.println("Ingrese idetificacion del empleado");
+        String id = input.next();
+
+        System.out.println("Ingrese salario del empleado");
+        double salary = input.nextDouble();
+
+        switch(option){
+            case 1:
+
+                showTypesEmployees();
+                option = readOption();
+
+                switch(option){
+
+                    case 1:
+
+                        System.out.println("Ingrese numero de equipos a cargo: ");
+                        int teamsInCharge = input.nextInt();
+
+                        System.out.println("Ingrese Campeonatos ganados: ");
+                        int wonChampionships = input.nextInt();
+
+                        System.out.println(club.hireEmployee(name,id,salary,teamsInCharge,wonChampionships));
+
+                        break;
+                    case 2:
+
+                        System.out.println("Seleccione experticia: ");
+                        showExpertises();
+                        int expertise = input.nextInt();
+
+                        System.out.println("Fue profesional en el pasado? [s] [n]: ");
+                        String wasPro = input.next();
+
+                        char wasPro1 = wasPro.charAt(0);
+
+                        System.out.println(club.hireEmployee(salary,wasPro1,expertise,name,id));
+
+                        break;
+                    case 3:
+                        System.out.println("Seleccione posicion: ");
+                        showPositions();
+                        int position = input.nextInt();
+
+                        System.out.println("Ingrese numero de camiseta: ");
+                        int jerseyNumber = input.nextInt();
+
+                        System.out.println("Ingrese numero de goles anotados: ");
+                        int scoredGoals = input.nextInt();
+
+                        System.out.println("Ingrese calificacion promedio: ");
+                        double averageRating = input.nextDouble();
+
+
+                        System.out.println(club.hireEmployee(name,id,salary,jerseyNumber,scoredGoals,averageRating,position));
+
+                        break;
+
+                    default:
+                        System.out.println("Ingrese una opcion valida");
+                        break;
+
+
+
+
+                }
+
+                break;
+            case 2:
+
+                System.out.println(club.fireEmployee(name));
+
+                break;
+            case 3:
+
+                System.out.println(club.displayEmployees());
+                break;
+            default:
+                System.out.println("Ingrese una opcion valida");
+                break;
+
+
+        }
+
+
+
+    }
+
+    public void facilities(){
+
+        int option;
+        showFacilityOptions();
+        option = readOption();
+
+        switch (option){
+
+            case 1:
+                System.out.println(club.displayOffices());
+                break;
+            case 2:
+                System.out.println(club.displayPlayersDressingRoomA());
+                break;
+            case 3:
+                System.out.println(club.displayPlayersDressingRoomB());
+                break;
+            default:
+                System.out.println("Ingrese una opcion valida");
+                break;
+
+
+        }
+
+
+
+    }
+
+    public void doOperation(int option) {
+
+        switch (option) {
+
+            case TEAMS:
+                teams();
+                break;
+            case EMPLOYEE_INFO:
+               employees();
+                break;
+            case FACILITIES:
+                facilities();
+                break;
+            case EXIT:
+                break;
+            default:
+                System.out.println("Ingrese una opcion valida");
+                break;
+
+        }
+
+    }
+
+    public void startProgram(){
+
+        int choice;
+
+        do{
+            showMenu();
+            choice = readOption();
+            doOperation(choice);
+
+
+        }while(choice != 4);
+
+
+
+    }
+
+
 
 
 }

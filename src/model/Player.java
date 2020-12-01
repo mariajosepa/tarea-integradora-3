@@ -10,7 +10,7 @@ public class Player extends Employee implements Valuable {
     private Position position;
 
 
-    public Player(String name, String id, double salary, int jerseyNumber, int scoredGoals, int averageRating, int position) {
+    public Player(String name, String id, double salary, int jerseyNumber, int scoredGoals, double averageRating, int position) {
         super(name, id, salary);
         this.jerseyNumber = jerseyNumber;
         this.scoredGoals = scoredGoals;
@@ -60,18 +60,36 @@ public class Player extends Employee implements Valuable {
         return starLevel;
     }
 
-
+    /**
+     * Returns a player's position
+     * @return player's position
+     */
     public String getPosition() {
         return position.name();
     }
+
+    /**
+     * Return's a player's average rating
+     * @return player's average rating
+     */
 
     public double getAverageRating() {
         return averageRating;
     }
 
+    /**
+     * Return's a player's scored goals
+     * @return player's scored goals
+     */
+
     public int getScoredGoals() {
         return scoredGoals;
     }
+
+    /**
+     * Return's player's shirt number
+     * @return player's shirt number
+     */
 
     public int getJerseyNumber() {
         return jerseyNumber;
