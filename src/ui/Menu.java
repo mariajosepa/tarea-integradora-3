@@ -316,7 +316,10 @@ public class Menu {
                         System.out.println("Ingrese Campeonatos ganados: ");
                         int wonChampionships = input.nextInt();
 
-                        System.out.println(club.hireEmployee(name,id,salary,teamsInCharge,wonChampionships));
+                        System.out.println("Anios de experiencia: ");
+                        int experience1 = input.nextInt();
+
+                        System.out.println(club.hireEmployee(name,id,salary,experience1,teamsInCharge,wonChampionships));
 
                         break;
                     case 2:
@@ -330,7 +333,10 @@ public class Menu {
 
                         char wasPro1 = wasPro.charAt(0);
 
-                        System.out.println(club.hireEmployee(salary,wasPro1,expertise,name,id));
+                        System.out.println("Anios de experiencia: ");
+                        int experience = input.nextInt();
+
+                        System.out.println(club.hireEmployee(salary,wasPro1,expertise,name,id,experience));
 
                         break;
                     case 3:

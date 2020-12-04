@@ -7,8 +7,8 @@ public class MainCoach extends Coach implements Valuable {
     private int teamsInCharge;
     private int wonChampionships;
 
-    public MainCoach(String name, String id, double salary, int teamsInCharge, int wonChampionships) {
-        super(name, id, salary);
+    public MainCoach(String name, String id, double salary, int experience, int teamsInCharge, int wonChampionships) {
+        super(name, id, salary,experience);
         this.teamsInCharge = teamsInCharge;
         this.wonChampionships = wonChampionships;
     }
@@ -48,6 +48,7 @@ public class MainCoach extends Coach implements Valuable {
         String msg = super.getInfo();
         msg += "Equipos a Cargo: " + getTeamsInCharge()+ "\n";
         msg +=  "Campeonatos Ganados " + getWonChampionships()+ "\n";
+        msg +=  "Experiencia: " + getYearsExperience()+ " anios" + "\n";
         msg +=  "Nivel de Estrella: " + starLevel()+ "\n";
         msg +=  "Valor de Mercado: " + marketPrice()+ "\n";
         msg += "------------------------------------" + "\n";

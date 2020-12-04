@@ -5,8 +5,8 @@ public class AssistantCoach extends Coach {
     private boolean wasPro;
     private Expertise expertise;
 
-    public AssistantCoach(double salary, char wasPro, int expertise, String name, String id) {
-        super(name, id, salary);
+    public AssistantCoach(double salary, char wasPro, int expertise, String name, String id, int experience) {
+        super(name, id, salary,experience);
 
         switch(wasPro){
 
@@ -48,8 +48,9 @@ public class AssistantCoach extends Coach {
 
         String wasPro = ((wasPro() == true) ? "Si" : "No");
        String msg = super.getInfo();
-       msg += "Profesional: " + wasPro+ "\n";
+        msg += "Profesional: " + wasPro+ "\n";
         msg += "Experticia: " + getExpertise()+ "\n";
+        msg += "Experiencia: " + getYearsExperience()+ " anios" + "\n";
         msg += "------------------------------------" + "\n";
         return msg;
     }

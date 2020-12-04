@@ -154,9 +154,9 @@ public class SoccerClub {
      * @return Message stating if employee could be successfully hired
      */
 
-    public String hireEmployee(String name, String id, double salary,int teamsInCharge, int wonChampionships){
+    public String hireEmployee(String name, String id, double salary, int experience, int teamsInCharge, int wonChampionships){
 
-        MainCoach mainCoach = new MainCoach(name, id, salary, teamsInCharge, wonChampionships);
+        MainCoach mainCoach = new MainCoach(name, id, salary,experience, teamsInCharge, wonChampionships);
 
         employees.add(mainCoach);
         mainCoach.setIsActiveOFF();
@@ -177,11 +177,11 @@ public class SoccerClub {
      * @return Message stating if employee could be successfully hired
      */
 
-    public String hireEmployee(double salary, char wasPro, int expertise, String name, String id){
+    public String hireEmployee(double salary, char wasPro, int expertise, String name, String id,int experience){
 
         expertise--;
 
-        AssistantCoach assistantCoach = new AssistantCoach(salary,wasPro,expertise,name,id);
+        AssistantCoach assistantCoach = new AssistantCoach(salary,wasPro,expertise,name,id,experience);
 
         employees.add(assistantCoach);
         assistantCoach.setIsActiveOFF();
@@ -284,7 +284,7 @@ public class SoccerClub {
 
             }
 
-            String msg = ((counter == 25) ? "Ese empleado no ha sido contratado" : "No hay cupo para mas jugadores en el equipo " + teams[team].getName() + "\n" );
+            String msg = ((counter == 25) ? "Ese empleado no ha sido contratado o no es un Jugador" : "No hay cupo para mas jugadores en el equipo " + teams[team].getName() + "\n" );
             return msg;
 
         }
@@ -332,7 +332,7 @@ public class SoccerClub {
 
             }
 
-            String msg = ((counter==3) ?  "Ese empleado no ha sido contratado" : "No hay mas cupos para tecnicos asistentes, puestos ocupados por " + Arrays.toString(teams[0].getAssistantCoaches()) + "\n" );
+            String msg = ((counter==3) ?  "Ese empleado no ha sido contratado o no es asistente tecnico" : "No hay mas cupos para tecnicos asistentes, puestos ocupados por " + Arrays.toString(teams[0].getAssistantCoaches()) + "\n" );
             return msg ;
 
 
@@ -366,7 +366,7 @@ public class SoccerClub {
 
         else{
 
-            String msg = ((teams[0].getMainCoach() != null) ? "Puesto ocupado por "+ teams[0].getMainCoach().getName()  : "Ese empleado no ha sido contratado");
+            String msg = ((teams[0].getMainCoach() != null) ? "Puesto ocupado por "+ teams[0].getMainCoach().getName()  : "Ese empleado no ha sido contratado o no es un Tecnico");
             return msg;
 
 
