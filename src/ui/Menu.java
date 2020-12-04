@@ -21,6 +21,11 @@ public class Menu {
 
     }
 
+    /**
+     * Reads User's selection
+     * @return user's selection
+     */
+
     public int readOption() {
         int choice = input.nextInt();
         input.nextLine();
@@ -28,6 +33,9 @@ public class Menu {
 
     }
 
+    /**
+     * Displays menu options
+     */
     public void showMenu() {
 
         System.out.println("(1) EQUIPOS");
@@ -35,11 +43,18 @@ public class Menu {
         System.out.println("(3) EDIFICIOS");
     }
 
+    /**
+     * Displays team selection options
+     */
     public void showTeams(){
 
         System.out.println("(1) FC JAVA");
         System.out.println("(2) FC APO");
     }
+
+    /**
+     * Displays team options
+     */
 
     public void showTeamOptions(){
 
@@ -51,12 +66,20 @@ public class Menu {
         System.out.println("(6) MOSTRAR EQUIPO");
     }
 
+    /**
+     * Displays facility options
+     */
+
     public void showFacilityOptions(){
 
         System.out.println("(1) OFICINAS");
         System.out.println("(2) CAMERINO JAVA");
         System.out.println("(3) CAMERINO APO");
     }
+
+    /**
+     * Displays available tactics
+     */
 
     public void showTactics(){
 
@@ -66,6 +89,10 @@ public class Menu {
         System.out.println("(4) POR DEFECTO");
     }
 
+    /**
+     * Displays available expertises
+     */
+
     public void showExpertises(){
 
         System.out.println("(1) OFENSIVO");
@@ -74,6 +101,10 @@ public class Menu {
         System.out.println("(4) LABORATORIO");
 
     }
+
+    /**
+     * Display different player positions
+     */
 
     public void showPositions(){
 
@@ -85,6 +116,10 @@ public class Menu {
 
     }
 
+    /**
+     * Displays employee options
+     */
+
     public void showEmployeeOptions(){
 
         System.out.println("(1) CONTRATAR EMPLEADO");
@@ -93,6 +128,10 @@ public class Menu {
 
     }
 
+    /**
+     * Displays types of employees
+     */
+
     public void showTypesEmployees(){
 
         System.out.println("(1) TECNICO");
@@ -100,6 +139,10 @@ public class Menu {
         System.out.println("(3) JUGADOR");
 
     }
+
+    /**
+     * Runs and executes different team selection options, such as adding a player or assigning a Coach
+     */
 
     public void teams(){
 
@@ -178,6 +221,11 @@ public class Menu {
 
     }
 
+    /**
+     * Assigns a main Coach
+     * @param team team where coach is being assigned
+     */
+
     public void assignMainCoach(int team){
 
         System.out.println("Ingrese nombre del tecnico");
@@ -185,6 +233,11 @@ public class Menu {
 
         System.out.println( club.assignMainCoach(team,name));
     }
+
+    /**
+     * Assigns an assistant coach
+     * @param team team where assistant is being assigned
+     */
 
     public void assignAssistantCoach(int team){
 
@@ -195,6 +248,11 @@ public class Menu {
 
     }
 
+    /**
+     * Adds player to team x
+     * @param team team where player is being added
+     */
+
     public void addPlayerToTeam(int team){
         System.out.println("Ingrese nombre del jugador");
         String name = input.next();
@@ -202,6 +260,11 @@ public class Menu {
         System.out.println(club.addPlayerToTeam(name,team));
 
     }
+
+    /**
+     * Adds new team formation
+     * @param team team where formation is being added
+     */
 
     public void addFormation(int team){
 
@@ -219,21 +282,26 @@ public class Menu {
 
     }
 
+    /**
+     * Displays and runs all operations related to employees, such as hiring and firing
+     */
+
     public void employees(){
         showEmployeeOptions();
         int option = readOption();
 
-        System.out.println("Ingrese nombre del empleado");
-        String name = input.next();
 
-        System.out.println("Ingrese idetificacion del empleado");
-        String id = input.next();
-
-        System.out.println("Ingrese salario del empleado");
-        double salary = input.nextDouble();
 
         switch(option){
             case 1:
+                System.out.println("Ingrese nombre del empleado");
+                String name = input.next();
+
+                System.out.println("Ingrese idetificacion del empleado");
+                String id = input.next();
+
+                System.out.println("Ingrese salario del empleado");
+                double salary = input.nextDouble();
 
                 showTypesEmployees();
                 option = readOption();
@@ -288,15 +356,14 @@ public class Menu {
                         System.out.println("Ingrese una opcion valida");
                         break;
 
-
-
-
                 }
 
                 break;
             case 2:
 
-                System.out.println(club.fireEmployee(name));
+                System.out.println("Ingrese nombre del empleado a despedir: ");
+                String employeeName = input.next();
+                System.out.println(club.fireEmployee(employeeName));
 
                 break;
             case 3:
@@ -313,6 +380,10 @@ public class Menu {
 
 
     }
+
+    /**
+     * Displays and runs all operations related to facilities, such as displaying dressing room accommodations
+     */
 
     public void facilities(){
 
@@ -342,6 +413,11 @@ public class Menu {
 
     }
 
+    /**
+     * Executes an action depending on the inputted option
+     * @param option desired option
+     */
+
     public void doOperation(int option) {
 
         switch (option) {
@@ -364,6 +440,10 @@ public class Menu {
         }
 
     }
+
+    /**
+     * Starts the program
+     */
 
     public void startProgram(){
 

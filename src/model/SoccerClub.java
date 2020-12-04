@@ -483,7 +483,7 @@ public class SoccerClub {
 
         for(Employee employee : employees){
 
-            if (employee instanceof Player && Arrays.asList(teams[team].getPlayers()).contains(employee.getName())){
+            if (employee instanceof Player && Arrays.asList(teams[team].getPlayers()).contains(employee)){
 
                 msg += employee.getInfo();
 
@@ -528,7 +528,7 @@ public class SoccerClub {
 
         for(Employee employee : employees){
 
-            if(employee instanceof AssistantCoach){
+            if(employee instanceof Player){
 
                 msg += employee.getInfo();
 
